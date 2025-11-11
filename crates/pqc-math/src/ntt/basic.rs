@@ -1,55 +1,97 @@
-//! Basic NTT implementation
+//! Basic implementation of NTT (Kyber-compatible)
+use super::trait_def::NTT;
+use crate::modular::{barrett_reduce, mod_add, mod_mul, mod_sub};
+use crate::params::{N, ZETAS};
 
-use super::NTT;
-use crate::modular::mod_q;
-use crate::params::ROOT;
-
-pub struct BasicNTT {
-    twiddles: [i32; 128],
-}
+pub struct BasicNTT;
 
 impl BasicNTT {
     pub fn new() -> Self {
-        Self {
-            twiddles: Self::precompute_twiddles(),
-        }
-    }
-
-    fn precompute_twiddles() -> [i32; 128] {
-        let mut twiddles = [0; 128];
-        let mut zeta = 1;
-        for i in 0..128 {
-            twiddles[i] = zeta;
-            zeta = mod_q(zeta * ROOT);
-        }
-        twiddles
+        Self
     }
 }
 
 impl NTT for BasicNTT {
     fn forward(&self, a: &mut [i32; 256]) {
+        let mut k = 1;
         let mut len = 128;
-        let mut k = 0;
 
-        while len >= 1 {
-            for start in (0..256).step_by(len * 2) {
-                let zeta = self.twiddles[k];
-                for j in 0..len {
-                    let t = mod_q(zeta * a[start + j + len]);
-                    a[start + j + len] = mod_q(a[start + j] - t);
-                    a[start + j] = mod_q(a[start + j] + t);
-                }
+        while len >= 2 {
+            for start in (0..N).step_by(2 * len) {
+                let zeta = ZETAS[k] as i32;
                 k += 1;
+
+                for j in start..start + len {
+                    let t = mod_mul(a[j + len], zeta);
+                    a[j + len] = mod_sub(a[j], t);
+                    a[j] = mod_add(a[j], t);
+                }
             }
-            len /= 2;
+            len >>= 1;
         }
     }
 
-    fn inverse(&self, _a: &mut [i32; 256]) {
-        todo!("Inverse NTT")
+    fn inverse(&self, a: &mut [i32; 256]) {
+        let mut k = 127;
+        let mut len = 2;
+
+        while len <= 128 {
+            let mut start = 0;
+            while start < N {
+                let zeta = ZETAS[k] as i32;
+                k = k.saturating_sub(1);
+
+                let mut j = start;
+                while j < start + len {
+                    let t = a[j];
+                    a[j] = barrett_reduce(t + a[j + len]);
+                    a[j + len] = mod_sub(a[j + len], t);
+                    a[j + len] = mod_mul(a[j + len], zeta);
+                    j += 1;
+                }
+
+                start = j + len;
+            }
+            len <<= 1;
+        }
+
+        let f = 512;  // 1441 * 169 mod 3329
+        for x in a.iter_mut() {
+            *x = mod_mul(*x, f);
+        }
     }
 
     fn name(&self) -> &'static str {
-        "Basic NTT"
+        "BasicNTT"
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_roundtrip() {
+        let ntt = BasicNTT::new();
+        let mut poly = [0i32; 256];
+
+        // Используем простые значения БЕЗ конвертации в Montgomery
+        for i in 0..8 {
+            poly[i] = (i + 1) as i32;
+        }
+
+        println!("Before NTT: {:?}", &poly[..8]);
+
+        let mut original = [0i32; 256];
+        original.copy_from_slice(&poly);
+
+        ntt.forward(&mut poly);
+        println!("After forward NTT: {:?}", &poly[..8]);
+
+        ntt.inverse(&mut poly);
+        println!("After inverse NTT: {:?}", &poly[..8]);
+        println!("Original: {:?}", &original[..8]);
+
+        assert_eq!(poly, original, "NTT roundtrip failed");
     }
 }

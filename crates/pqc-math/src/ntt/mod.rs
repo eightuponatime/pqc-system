@@ -1,7 +1,7 @@
 //! number theoretic transform (ntt) realization
 
-mod trait_def;
-mod basic;
+pub mod basic;
+pub mod trait_def;
 
-pub use trait_def::NTT;
 pub use basic::BasicNTT;
+pub use trait_def::NTT;
