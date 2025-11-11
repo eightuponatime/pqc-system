@@ -1,0 +1,12 @@
+[package]
+name = "pqc-bench"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+pqc-math = { path = "../pqc-math" }
+criterion.workspace = true
+
+[[bench]]
+name = "ntt_comparison"
+harness = false

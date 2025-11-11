@@ -1,0 +1,14 @@
+[package]
+name = "pqc-kyber"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+pqc-math = { path = "../pqc-math" }
+rand.workspace = true
+
+[features]
+default = ["kyber512"]
+kyber512 = []
+kyber768 = []
+kyber1024 = []
