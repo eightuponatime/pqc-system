@@ -5,7 +5,6 @@ edition.workspace = true
 
 [dependencies]
 pqc-math = { path = "../pqc-math" }
-rand.workspace = true
 
 [features]
 default = ["kyber512"]
