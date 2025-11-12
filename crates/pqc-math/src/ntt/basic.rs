@@ -1,7 +1,7 @@
 //! Basic implementation of NTT (Kyber-compatible)
 use super::trait_def::NTT;
 use crate::modular::{barrett_reduce, mod_add, mod_mul, mod_sub};
-use crate::params::{N, ZETAS};
+use crate::params::{N, Q, ZETAS};
 
 pub struct BasicNTT;
 
@@ -55,9 +55,13 @@ impl NTT for BasicNTT {
             len <<= 1;
         }
 
-        let f = 512;  // 1441 * 169 mod 3329
+        let f = 512;
         for x in a.iter_mut() {
             *x = mod_mul(*x, f);
+            // Нормализуем к каноническому диапазону [0, Q)
+            if *x < 0 {
+                *x += Q;
+            }
         }
     }
 
@@ -75,7 +79,6 @@ mod tests {
         let ntt = BasicNTT::new();
         let mut poly = [0i32; 256];
 
-        // Используем простые значения БЕЗ конвертации в Montgomery
         for i in 0..8 {
             poly[i] = (i + 1) as i32;
         }
@@ -93,5 +96,22 @@ mod tests {
         println!("Original: {:?}", &original[..8]);
 
         assert_eq!(poly, original, "NTT roundtrip failed");
+    }
+
+    #[test]
+    fn test_roundtrip_full() {
+        let ntt = BasicNTT::new();
+        let mut poly = [0i32; 256];
+
+        for i in 0..256 {
+            poly[i] = (i as i32 * 13) % 3329;
+        }
+
+        let original = poly.clone();
+
+        ntt.forward(&mut poly);
+        ntt.inverse(&mut poly);
+
+        assert_eq!(poly, original, "NTT roundtrip failed for full array");
     }
 }

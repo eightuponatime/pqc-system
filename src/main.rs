@@ -1,29 +1,38 @@
-use pqc_math::NTT;
-use pqc_math::ntt::basic::BasicNTT;
+use pqc_math::{BasicNTT, NTT};
 
 fn main() {
-  test_ntt_roundtrip();
-}
+    let ntt = BasicNTT::new();
+    let mut poly = [0i32; 256];
 
-/// Проверка прямого и обратного преобразования NTT
-fn test_ntt_roundtrip() {
-  let ntt = BasicNTT::new();
-  let mut data = [0i32; 256];
-  data[0] = 1;
-  data[1] = 2;
-  data[2] = 3;
+    for i in 0..256 {
+        poly[i] = (i as i32 * 13) % 3329;
+    }
 
-  let original = data;
+    println!("Before NTT (first 8): {:?}", &poly[..8]);
+    let original = poly.clone();
 
-  ntt.forward(&mut data);
-  ntt.inverse(&mut data);
+    ntt.forward(&mut poly);
+    println!("After forward (first 8): {:?}", &poly[..8]);
 
-  println!("Original:      {:?}", &original[..8]);
-  println!("After inverse: {:?}", &data[..8]);
+    ntt.inverse(&mut poly);
+    println!("After inverse (first 8): {:?}", &poly[..8]);
+    println!("Expected (first 8): {:?}", &original[..8]);
 
-  if data == original {
-    println!("✅ Round-trip successful!");
-  } else {
-    println!("❌ Round-trip failed!");
-  }
+    // Проверим где отличается
+    let mut diff_count = 0;
+    for i in 0..256 {
+        if poly[i] != original[i] {
+            if diff_count < 5 {
+                println!("Diff at {}: got {}, expected {}", i, poly[i], original[i]);
+            }
+            diff_count += 1;
+        }
+    }
+    println!("Total differences: {}/256", diff_count);
+
+    if poly == original {
+        println!("✓ NTT correctness test passed");
+    } else {
+        println!("✗ NTT correctness test FAILED");
+    }
 }

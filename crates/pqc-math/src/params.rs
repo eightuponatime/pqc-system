@@ -11,7 +11,7 @@ pub const Q: i32 = 3329;
 /// polynome size
 pub const N: usize = 256;
 
-/// Предвычисленные zetas для NTT (из официального Kyber)
+/// precalculared zetas for NTT (from official Kyber)
 /// https://github.com/pq-crystals/kyber/blob/master/ref/ntt.c
 pub const ZETAS: [i16; 128] = [
     -1044, -758, -359, -1517, 1493, 1422, 287, 202, -171, 622, 1577, 182, 962, -1202, -1474, 1468,

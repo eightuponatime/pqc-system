@@ -35,11 +35,10 @@ pub fn mod_mul(a: i32, b: i32) -> i32 {
     montgomery_reduce(a as i64 * b as i64)
 }
 
-/// Barrett reduction (альтернатива для сложения, если нужна точная редукция)
+/// Barrett reduction
 #[inline]
 pub fn barrett_reduce(a: i32) -> i32 {
     let v = ((1i64 << 26) + (Q as i64 / 2)) / Q as i64;
-    let t = (v * a as i64) >> 26;
-    let result = a - (t as i32) * Q;
-    result
+    let t = ((v * a as i64 + (1i64 << 25)) >> 26) as i32;
+    a - t * Q
 }
