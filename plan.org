@@ -1,0 +1,24 @@
+#+title: Plan
+* Basic Kyber realization
+[x] NTT forward/inverse
+[ ] Polynomial multiplication with NTT
+[ ] Compression/Decompression
+[ ] Generating random polynomials (Sampling): CBD, Uniform sampling
+[ ] Matrix-Vector operations (polyphase decomposition)
+[ ] Hash functions for deterministic generations
+[ ] General Kyber functions keygen(), encaps(), decaps()
+
+* Polyhedral optimization
+[x] NTT (forward and inverse transforms)
+[ ] Pointwise multiplication
+[ ] Matrix-vector mul (KeyGen: t = A·s + e)
+[ ] Encrypt: u = A·r + e1, v = t·r + e2 + m
+[ ] Decrypt: v - u·s
+[ ] Add noise / mod reduction
+[ ] Packing (partial, block-wise)
+
+* criteries for FPGA
+>= 90 000 - 100 000 LUT(Logic Cells)
+>= 100 - 120 DSP (Hardware Units that increase multiplication speed)
+>= 100 BRAM (Inregrated Memory)
+>= 200 MHz (Minimum Possible Frequency)

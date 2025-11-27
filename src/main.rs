@@ -18,7 +18,6 @@ fn main() {
     println!("After inverse (first 8): {:?}", &poly[..8]);
     println!("Expected (first 8): {:?}", &original[..8]);
 
-    // Проверим где отличается
     let mut diff_count = 0;
     for i in 0..256 {
         if poly[i] != original[i] {

@@ -1,0 +1,411 @@
+smooth@life:~/code/rust/dis/pqc-system/crates/pqc-math/benches$ cargo bench --bench simd_benchmark
+   Compiling pqc-math v0.1.0 (/home/smooth/code/rust/dis/pqc-system/crates/pqc-math)
+warning[E0133]: call to unsafe function `std::arch::x86_64::_mm256_loadu_si256` is unsafe and requires unsafe block
+  --> crates/pqc-math/src/ntt/true_simd.rs:26:18
+   |
+26 |         let va = _mm256_loadu_si256(a.as_ptr() as *const __m256i);
+   |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ call to unsafe function
+   |
+   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html>
+   = note: consult the function's documentation for information on how to avoid undefined behavior
+note: an unsafe function restricts its caller, but its body is safe by default
+  --> crates/pqc-math/src/ntt/true_simd.rs:25:5
+   |
+25 |     pub unsafe fn simd_mod_add_8(&self, a: &[i32; 8], b: &[i32; 8]) -> [i32; 8] {
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   = note: `#[warn(unsafe_op_in_unsafe_fn)]` (part of `#[warn(rust_2024_compatibility)]`) on by default
+
+warning[E0133]: call to unsafe function `std::arch::x86_64::_mm256_loadu_si256` is unsafe and requires unsafe block
+  --> crates/pqc-math/src/ntt/true_simd.rs:27:18
+   |
+27 |         let vb = _mm256_loadu_si256(b.as_ptr() as *const __m256i);
+   |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ call to unsafe function
+   |
+   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html>
+   = note: consult the function's documentation for information on how to avoid undefined behavior
+
+warning[E0133]: call to unsafe function `std::arch::x86_64::_mm256_storeu_si256` is unsafe and requires unsafe block
+  --> crates/pqc-math/src/ntt/true_simd.rs:36:9
+   |
+36 |         _mm256_storeu_si256(output.as_mut_ptr() as *mut __m256i, result);
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ call to unsafe function
+   |
+   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html>
+   = note: consult the function's documentation for information on how to avoid undefined behavior
+
+warning[E0133]: call to unsafe function `std::arch::x86_64::_mm256_loadu_si256` is unsafe and requires unsafe block
+  --> crates/pqc-math/src/ntt/true_simd.rs:42:18
+   |
+42 |         let va = _mm256_loadu_si256(a.as_ptr() as *const __m256i);
+   |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ call to unsafe function
+   |
+   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html>
+   = note: consult the function's documentation for information on how to avoid undefined behavior
+note: an unsafe function restricts its caller, but its body is safe by default
+  --> crates/pqc-math/src/ntt/true_simd.rs:41:5
+   |
+41 |     pub unsafe fn simd_mod_sub_8(&self, a: &[i32; 8], b: &[i32; 8]) -> [i32; 8] {
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning[E0133]: call to unsafe function `std::arch::x86_64::_mm256_loadu_si256` is unsafe and requires unsafe block
+  --> crates/pqc-math/src/ntt/true_simd.rs:43:18
+   |
+43 |         let vb = _mm256_loadu_si256(b.as_ptr() as *const __m256i);
+   |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ call to unsafe function
+   |
+   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html>
+   = note: consult the function's documentation for information on how to avoid undefined behavior
+
+warning[E0133]: call to unsafe function `std::arch::x86_64::_mm256_storeu_si256` is unsafe and requires unsafe block
+  --> crates/pqc-math/src/ntt/true_simd.rs:53:9
+   |
+53 |         _mm256_storeu_si256(output.as_mut_ptr() as *mut __m256i, result);
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ call to unsafe function
+   |
+   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html>
+   = note: consult the function's documentation for information on how to avoid undefined behavior
+
+warning[E0133]: call to unsafe function `std::arch::x86_64::_mm256_loadu_si256` is unsafe and requires unsafe block
+  --> crates/pqc-math/src/ntt/true_simd.rs:61:18
+   |
+61 |         let va = _mm256_loadu_si256(a.as_ptr() as *const __m256i);
+   |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ call to unsafe function
+   |
+   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html>
+   = note: consult the function's documentation for information on how to avoid undefined behavior
+note: an unsafe function restricts its caller, but its body is safe by default
+  --> crates/pqc-math/src/ntt/true_simd.rs:58:5
+   |
+58 |     pub unsafe fn simd_mod_mul_8(&self, a: &[i32; 8], b: &[i32; 8]) -> [i32; 8] {
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning[E0133]: call to unsafe function `std::arch::x86_64::_mm256_loadu_si256` is unsafe and requires unsafe block
+  --> crates/pqc-math/src/ntt/true_simd.rs:62:18
+   |
+62 |         let vb = _mm256_loadu_si256(b.as_ptr() as *const __m256i);
+   |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ call to unsafe function
+   |
+   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html>
+   = note: consult the function's documentation for information on how to avoid undefined behavior
+
+warning[E0133]: call to unsafe function `std::arch::x86_64::_mm256_storeu_si256` is unsafe and requires unsafe block
+   --> crates/pqc-math/src/ntt/true_simd.rs:108:9
+    |
+108 | ...   _mm256_storeu_si256(temp_even.as_mut_ptr() as *mut __m256i, result_even_64);
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ call to unsafe function
+    |
+    = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html>
+    = note: consult the function's documentation for information on how to avoid undefined behavior
+
+warning[E0133]: call to unsafe function `std::arch::x86_64::_mm256_storeu_si256` is unsafe and requires unsafe block
+   --> crates/pqc-math/src/ntt/true_simd.rs:109:9
+    |
+109 | ...   _mm256_storeu_si256(temp_odd.as_mut_ptr() as *mut __m256i, result_odd_64);
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ call to unsafe function
+    |
+    = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html>
+    = note: consult the function's documentation for information on how to avoid undefined behavior
+
+warning[E0133]: call to unsafe function `std::arch::x86_64::_mm256_loadu_si256` is unsafe and requires unsafe block
+   --> crates/pqc-math/src/ntt/true_simd.rs:125:18
+    |
+125 |         let va = _mm256_loadu_si256(a.as_ptr() as *const __m256i);
+    |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ call to unsafe function
+    |
+    = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html>
+    = note: consult the function's documentation for information on how to avoid undefined behavior
+note: an unsafe function restricts its caller, but its body is safe by default
+   --> crates/pqc-math/src/ntt/true_simd.rs:124:5
+    |
+124 |     pub unsafe fn simd_barrett_reduce_8(&self, a: &[i32; 8]) -> [i32; 8] {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning[E0133]: call to unsafe function `std::arch::x86_64::_mm256_storeu_si256` is unsafe and requires unsafe block
+   --> crates/pqc-math/src/ntt/true_simd.rs:172:9
+    |
+172 |         _mm256_storeu_si256(t_02.as_mut_ptr() as *mut __m256i, t_02_64);
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ call to unsafe function
+    |
+    = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html>
+    = note: consult the function's documentation for information on how to avoid undefined behavior
+
+warning[E0133]: call to unsafe function `std::arch::x86_64::_mm256_storeu_si256` is unsafe and requires unsafe block
+   --> crates/pqc-math/src/ntt/true_simd.rs:173:9
+    |
+173 |         _mm256_storeu_si256(t_13.as_mut_ptr() as *mut __m256i, t_13_64);
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ call to unsafe function
+    |
+    = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html>
+    = note: consult the function's documentation for information on how to avoid undefined behavior
+
+warning[E0133]: call to unsafe function `std::arch::x86_64::_mm256_storeu_si256` is unsafe and requires unsafe block
+   --> crates/pqc-math/src/ntt/true_simd.rs:174:9
+    |
+174 |         _mm256_storeu_si256(t_46.as_mut_ptr() as *mut __m256i, t_46_64);
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ call to unsafe function
+    |
+    = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html>
+    = note: consult the function's documentation for information on how to avoid undefined behavior
+
+warning[E0133]: call to unsafe function `std::arch::x86_64::_mm256_storeu_si256` is unsafe and requires unsafe block
+   --> crates/pqc-math/src/ntt/true_simd.rs:175:9
+    |
+175 |         _mm256_storeu_si256(t_57.as_mut_ptr() as *mut __m256i, t_57_64);
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ call to unsafe function
+    |
+    = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html>
+    = note: consult the function's documentation for information on how to avoid undefined behavior
+
+warning[E0133]: call to unsafe function `ntt::true_simd::TrueSimdNTT::simd_mod_mul_8` is unsafe and requires unsafe block
+   --> crates/pqc-math/src/ntt/true_simd.rs:236:29
+    |
+236 |                     let t = self.simd_mod_mul_8(&a_upper, &zeta_vec);
+    |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ call to unsafe function
+    |
+    = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html>
+    = note: consult the function's documentation for information on how to avoid undefined behavior
+note: an unsafe function restricts its caller, but its body is safe by default
+   --> crates/pqc-math/src/ntt/true_simd.rs:200:5
+    |
+200 |     unsafe fn forward_simd(&self, a: &mut [i32; 256]) {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning[E0133]: call to unsafe function `ntt::true_simd::TrueSimdNTT::simd_mod_add_8` is unsafe and requires unsafe block
+   --> crates/pqc-math/src/ntt/true_simd.rs:237:33
+    |
+237 |                     let a_new = self.simd_mod_add_8(&a_lower, &t);
+    |                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ call to unsafe function
+    |
+    = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html>
+    = note: consult the function's documentation for information on how to avoid undefined behavior
+
+warning[E0133]: call to unsafe function `ntt::true_simd::TrueSimdNTT::simd_mod_sub_8` is unsafe and requires unsafe block
+   --> crates/pqc-math/src/ntt/true_simd.rs:238:33
+    |
+238 |                     let b_new = self.simd_mod_sub_8(&a_lower, &t);
+    |                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ call to unsafe function
+    |
+    = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html>
+    = note: consult the function's documentation for information on how to avoid undefined behavior
+
+warning[E0133]: call to unsafe function `ntt::true_simd::TrueSimdNTT::simd_mod_add_8` is unsafe and requires unsafe block
+   --> crates/pqc-math/src/ntt/true_simd.rs:300:31
+    |
+300 |                     let sum = self.simd_mod_add_8(&a_lower, &a_upper);
+    |                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ call to unsafe function
+    |
+    = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html>
+    = note: consult the function's documentation for information on how to avoid undefined behavior
+note: an unsafe function restricts its caller, but its body is safe by default
+   --> crates/pqc-math/src/ntt/true_simd.rs:262:5
+    |
+262 |     unsafe fn inverse_simd(&self, a: &mut [i32; 256]) {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning[E0133]: call to unsafe function `ntt::true_simd::TrueSimdNTT::simd_barrett_reduce_8` is unsafe and requires unsafe block
+   --> crates/pqc-math/src/ntt/true_simd.rs:301:33
+    |
+301 |                     let a_new = self.simd_barrett_reduce_8(&sum);
+    |                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ call to unsafe function
+    |
+    = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html>
+    = note: consult the function's documentation for information on how to avoid undefined behavior
+
+warning[E0133]: call to unsafe function `ntt::true_simd::TrueSimdNTT::simd_mod_sub_8` is unsafe and requires unsafe block
+   --> crates/pqc-math/src/ntt/true_simd.rs:303:32
+    |
+303 |                     let diff = self.simd_mod_sub_8(&a_upper, &a_lower);
+    |                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ call to unsafe function
+    |
+    = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html>
+    = note: consult the function's documentation for information on how to avoid undefined behavior
+
+warning[E0133]: call to unsafe function `ntt::true_simd::TrueSimdNTT::simd_mod_mul_8` is unsafe and requires unsafe block
+   --> crates/pqc-math/src/ntt/true_simd.rs:304:33
+    |
+304 |                     let b_new = self.simd_mod_mul_8(&diff, &zeta_vec);
+    |                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ call to unsafe function
+    |
+    = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html>
+    = note: consult the function's documentation for information on how to avoid undefined behavior
+
+warning[E0133]: call to unsafe function `ntt::true_simd::TrueSimdNTT::simd_mod_mul_8` is unsafe and requires unsafe block
+   --> crates/pqc-math/src/ntt/true_simd.rs:344:26
+    |
+344 |             let result = self.simd_mod_mul_8(&chunk, &f_vec);
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ call to unsafe function
+    |
+    = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html>
+    = note: consult the function's documentation for information on how to avoid undefined behavior
+
+warning: constant `QINV` is never used
+ --> crates/pqc-math/src/modular.rs:5:7
+  |
+5 | const QINV: i32 = -3327; // q^(-1) mod 2^16
+  |       ^^^^
+  |
+  = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: constant `QINV` is never used
+  --> crates/pqc-math/src/params.rs:29:7
+   |
+29 | const QINV: i32 = -3327; // q^(-1) mod 2^16
+   |       ^^^^
+
+For more information about this error, try `rustc --explain E0133`.
+warning: `pqc-math` (lib) generated 25 warnings (run `cargo fix --lib -p pqc-math` to apply 6 suggestions)
+    Finished `bench` profile [optimized] target(s) in 27.87s
+     Running benches/simd_benchmark.rs (/home/smooth/code/rust/dis/pqc-system/target/release/deps/simd_benchmark-30b381c49d6e85a6)
+Gnuplot not found, using plotters backend
+Benchmarking simd_vs_scalar/scalar_mod_add_8x: Collecting 100 samples in estimat
+simd_vs_scalar/scalar_mod_add_8x
+                        time:   [10.545 ns 10.560 ns 10.577 ns]
+                        change: [-2.4461% +0.3692% +2.7176%] (p = 0.80 > 0.05)
+                        No change in performance detected.
+Found 3 outliers among 100 measurements (3.00%)
+  2 (2.00%) high mild
+  1 (1.00%) high severe
+Benchmarking simd_vs_scalar/simd_mod_add_8x: Collecting 100 samples in estimated
+simd_vs_scalar/simd_mod_add_8x
+                        time:   [6.3798 ns 6.4985 ns 6.6767 ns]
+                        change: [-7.9934% -2.9765% +1.5055%] (p = 0.27 > 0.05)
+                        No change in performance detected.
+Found 8 outliers among 100 measurements (8.00%)
+  1 (1.00%) low severe
+  1 (1.00%) low mild
+  6 (6.00%) high severe
+Benchmarking simd_vs_scalar/scalar_mod_sub_8x: Collecting 100 samples in estimat
+simd_vs_scalar/scalar_mod_sub_8x
+                        time:   [10.347 ns 10.380 ns 10.429 ns]
+                        change: [-21.731% -17.401% -12.947%] (p = 0.00 < 0.05)
+                        Performance has improved.
+Found 6 outliers among 100 measurements (6.00%)
+  1 (1.00%) high mild
+  5 (5.00%) high severe
+Benchmarking simd_vs_scalar/simd_mod_sub_8x: Collecting 100 samples in estimated
+simd_vs_scalar/simd_mod_sub_8x
+                        time:   [6.6279 ns 6.6370 ns 6.6471 ns]
+                        change: [-5.6841% -2.9061% -0.3713%] (p = 0.04 < 0.05)
+                        Change within noise threshold.
+Found 4 outliers among 100 measurements (4.00%)
+  1 (1.00%) low mild
+  2 (2.00%) high mild
+  1 (1.00%) high severe
+Benchmarking simd_vs_scalar/scalar_mod_mul_8x: Collecting 100 samples in estimat
+simd_vs_scalar/scalar_mod_mul_8x
+                        time:   [13.260 ns 13.390 ns 13.642 ns]
+                        change: [-2.3576% -0.7214% +0.9037%] (p = 0.43 > 0.05)
+                        No change in performance detected.
+Found 11 outliers among 100 measurements (11.00%)
+  1 (1.00%) low severe
+  1 (1.00%) low mild
+  5 (5.00%) high mild
+  4 (4.00%) high severe
+Benchmarking simd_vs_scalar/simd_mod_mul_8x: Collecting 100 samples in estimated
+simd_vs_scalar/simd_mod_mul_8x
+                        time:   [8.8869 ns 8.9180 ns 8.9727 ns]
+                        change: [-9.7061% -7.4908% -4.3030%] (p = 0.00 < 0.05)
+                        Performance has improved.
+Found 15 outliers among 100 measurements (15.00%)
+  3 (3.00%) low severe
+  1 (1.00%) low mild
+  3 (3.00%) high mild
+  8 (8.00%) high severe
+Benchmarking simd_vs_scalar/scalar_barrett_8x: Collecting 100 samples in estimat
+simd_vs_scalar/scalar_barrett_8x
+                        time:   [9.4077 ns 9.5619 ns 9.7825 ns]
+                        change: [-10.071% -8.2348% -6.4676%] (p = 0.00 < 0.05)
+                        Performance has improved.
+Found 19 outliers among 100 measurements (19.00%)
+  6 (6.00%) low severe
+  4 (4.00%) low mild
+  1 (1.00%) high mild
+  8 (8.00%) high severe
+Benchmarking simd_vs_scalar/simd_barrett_8x: Collecting 100 samples in estimated
+simd_vs_scalar/simd_barrett_8x
+                        time:   [8.7346 ns 8.8600 ns 8.9787 ns]
+                        change: [-0.1991% +1.4612% +3.1920%] (p = 0.10 > 0.05)
+                        No change in performance detected.
+Found 15 outliers among 100 measurements (15.00%)
+  8 (8.00%) low severe
+  2 (2.00%) high mild
+  5 (5.00%) high severe
+
+Benchmarking ntt_comparison/BasicNTT_forward: Collecting 100 samples in estimate
+ntt_comparison/BasicNTT_forward
+                        time:   [3.0286 µs 3.0396 µs 3.0543 µs]
+                        change: [-8.8511% -7.2054% -5.8511%] (p = 0.00 < 0.05)
+                        Performance has improved.
+Found 12 outliers among 100 measurements (12.00%)
+  5 (5.00%) high mild
+  7 (7.00%) high severe
+Benchmarking ntt_comparison/TrueSimdNTT_forward: Collecting 100 samples in estim
+ntt_comparison/TrueSimdNTT_forward
+                        time:   [2.7592 µs 2.7735 µs 2.7972 µs]
+                        change: [-3.8411% -0.8632% +1.9140%] (p = 0.61 > 0.05)
+                        No change in performance detected.
+Found 6 outliers among 100 measurements (6.00%)
+  1 (1.00%) low severe
+  1 (1.00%) low mild
+  2 (2.00%) high mild
+  2 (2.00%) high severe
+Benchmarking ntt_comparison/PolyhedralSimdNTT_forward: Collecting 100 samples in
+ntt_comparison/PolyhedralSimdNTT_forward
+                        time:   [2.5522 µs 2.5620 µs 2.5782 µs]
+Found 5 outliers among 100 measurements (5.00%)
+  3 (3.00%) high mild
+  2 (2.00%) high severe
+Benchmarking ntt_comparison/BasicNTT_inverse: Collecting 100 samples in estimate
+ntt_comparison/BasicNTT_inverse
+                        time:   [3.5335 µs 3.5672 µs 3.6352 µs]
+                        change: [-11.436% -7.3354% -3.4246%] (p = 0.00 < 0.05)
+                        Performance has improved.
+Found 11 outliers among 100 measurements (11.00%)
+  1 (1.00%) low severe
+  1 (1.00%) low mild
+  3 (3.00%) high mild
+  6 (6.00%) high severe
+Benchmarking ntt_comparison/TrueSimdNTT_inverse: Collecting 100 samples in estim
+ntt_comparison/TrueSimdNTT_inverse
+                        time:   [3.6178 µs 3.6301 µs 3.6423 µs]
+                        change: [-14.056% -11.530% -9.4221%] (p = 0.00 < 0.05)
+                        Performance has improved.
+Found 8 outliers among 100 measurements (8.00%)
+  1 (1.00%) low severe
+  2 (2.00%) high mild
+  5 (5.00%) high severe
+Benchmarking ntt_comparison/PolyhedralSimdNTT_inverse: Collecting 100 samples in
+ntt_comparison/PolyhedralSimdNTT_inverse
+                        time:   [3.1860 µs 3.2029 µs 3.2315 µs]
+Found 17 outliers among 100 measurements (17.00%)
+  6 (6.00%) low mild
+  5 (5.00%) high mild
+  6 (6.00%) high severe
+Benchmarking ntt_comparison/BasicNTT_roundtrip: Collecting 100 samples in estima
+ntt_comparison/BasicNTT_roundtrip
+                        time:   [6.3933 µs 6.4095 µs 6.4300 µs]
+                        change: [-7.8261% -6.2712% -4.7880%] (p = 0.00 < 0.05)
+                        Performance has improved.
+Found 8 outliers among 100 measurements (8.00%)
+  3 (3.00%) high mild
+  5 (5.00%) high severe
+Benchmarking ntt_comparison/TrueSimdNTT_roundtrip: Collecting 100 samples in est
+ntt_comparison/TrueSimdNTT_roundtrip
+                        time:   [6.1911 µs 6.2000 µs 6.2122 µs]
+                        change: [-4.8069% -3.1032% -1.5533%] (p = 0.00 < 0.05)
+                        Performance has improved.
+Found 11 outliers among 100 measurements (11.00%)
+  1 (1.00%) low severe
+  3 (3.00%) low mild
+  5 (5.00%) high mild
+  2 (2.00%) high severe
+Benchmarking ntt_comparison/PolyhedralSimdNTT_roundtrip: Collecting 100 samples
+ntt_comparison/PolyhedralSimdNTT_roundtrip
+                        time:   [5.8112 µs 5.8160 µs 5.8216 µs]
+Found 6 outliers among 100 measurements (6.00%)
+  1 (1.00%) low severe
+  4 (4.00%) high mild
+  1 (1.00%) high severe
+
+smooth@life:~/code/rust/dis/pqc-system/crates/pqc-math/benches$
+

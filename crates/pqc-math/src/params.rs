@@ -25,3 +25,5 @@ pub const ZETAS: [i16; 128] = [
 ];
 
 pub const F: i16 = 1441; // mont^2/128
+
+const QINV: i32 = -3327; // q^(-1) mod 2^16

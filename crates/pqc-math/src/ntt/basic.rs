@@ -1,4 +1,7 @@
 //! Basic implementation of NTT (Kyber-compatible)
+//! a simple realization of NTT to compare with other methods.
+//! rust's compiler (LLVM) automatically applies basic optimizations
+
 use super::trait_def::NTT;
 use crate::modular::{barrett_reduce, mod_add, mod_mul, mod_sub};
 use crate::params::{N, Q, ZETAS};
@@ -58,7 +61,7 @@ impl NTT for BasicNTT {
         let f = 512;
         for x in a.iter_mut() {
             *x = mod_mul(*x, f);
-            // Нормализуем к каноническому диапазону [0, Q)
+            // normalize by canonical range [0, Q)
             if *x < 0 {
                 *x += Q;
             }

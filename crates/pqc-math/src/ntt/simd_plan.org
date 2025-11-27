@@ -1,0 +1,64 @@
+#+title: Simd Plan
+* modular arithmetic operations
+we can proceed 4-8 operations at the same time because of AVX2 arch: 8xi32
+[ ] mod_add
+[ ] mod_sub
+[ ] mod_mul
+[ ] montgomery_reduce
+[ ] barret_reduce
+
+** notes
+for 64 bit intermediate results we can you use __mm256_mul_epi32
+
+* butterfly operations
+ex: ```
+t0 = mod_mul(a[j + len], zeta);
+a[j + len] = mod_sub(a[j], t0);
+a[j] = mod_add(a[j], t0);
+```
+*problem:* we process 4 elements sequentially
+*possible solution:*
+*** load 4 start elements in one SIMD register;
+*** load 4 start+len elements in the other register;
+*** process 4 multiplications on zeta in parallel
+*** process 4 sub and 4 add operation in parallel
+*** write results back
+
+* inverse butterfly operations
+ex: ```
+let t0 = a[j];
+a[j] = barrett_reduce(t0 + a[j + len]);
+a[j + len] = mod_mul(mod_sub(a[j + len], t0), zeta);
+```
+*SIMD solution*:
+*** vector additions for barrett_Reduce(t = a[j+len])
+*** vector additions and substractions
+*** all 4 butterfly operations proceed in parallel
+
+* final normalization in inverse n
+```
+for x in a.iter_mut() {
+    *x = mod_mul(*x, f);
+    if *x < 0 {
+        *x += Q;
+    }
+}
+```
+*SIMD solution*:
+*** process an array of 256 elements in blocks of 8 (AVX2)
+*** vector multiplication by a constant f
+*** vector comparison with zero and conditional addition of Q
+*** instead of 256 iterations → 32 iterations (8x speedup)
+
+* loading twiddle factors (zeta)
+now:
+```
+let zeta = self.twiddles[k];
+```
+*SIMD solutions*:
+*** if the same zeta is used for several elements, you need to "multiply" it in the SIMD register.
+*** instruction like __mm256_set1_epi32(zeta) will create vector [zeta, zeta, zeta, zeta, zeta, zeta, zeta, zeta]
+
+* memory access
+_mm256_loadu_si256 - to load 8 elements in a row
+_mm256_storeu_si256 - to write results
